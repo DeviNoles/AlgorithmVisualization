@@ -5,5 +5,5 @@ main() async {
     var app = Angel();
     var http = AngelHttp(app);
     app.get('/', (req, res) => res.write('Hello, world!'));
-    await http.startServer('localhost', 3000);
+    await http.startServer('0.0.0.0', 3000);
 }
