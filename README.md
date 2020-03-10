@@ -1,6 +1,6 @@
 # AlgorithmVisualization
 - [X] Angel
 - [ ] Redis
-- [ ] React
+- [X] React
 - [ ] Random Data
 - [ ] Docker
