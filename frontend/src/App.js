@@ -15,10 +15,10 @@ class App extends Component{
   Algorithm Visualization
   </div>
   <div id="nodeContainer">
-  <Node/>
-    <Node/>
-      <Node/>
-        <Node/>
+  <Node background = "blue" height = "20vh"/>
+  <Node background = "red" height = "10vh"/>
+  <Node background = "yellow" height = "20vh"/>
+  <Node background = "black" height = "5vh"/>
   </div>
   </div>
 </div>
