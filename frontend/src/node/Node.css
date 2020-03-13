@@ -1,7 +1,3 @@
-#nodeBackground{
-  background:#fff ;
-  display: inline !importantt;
-  height:20px;
-  width: 100%;
-  padding-left: 1000px;
+#nodeContainer{
+  display: flex !important;
 }

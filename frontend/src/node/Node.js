@@ -6,8 +6,10 @@ class Node extends Component{
 
   render(){
     return (
-      <div id="nodeBackground">
+      <div id="nodeContainer">
+      here
       </div>
+
     )
   }
 }

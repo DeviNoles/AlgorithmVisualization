@@ -7,17 +7,22 @@ class App extends Component{
 
     random();
     return (
-
+    <div id="nodeBackground">
   <div class="container">
+
 
   <div id="menu">
   Algorithm Visualization
   </div>
-
-  <div>
+  <div id="nodeContainer">
   <Node/>
+    <Node/>
+      <Node/>
+        <Node/>
   </div>
-    </div>
+  </div>
+</div>
+
 
     );
   }
