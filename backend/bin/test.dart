@@ -1,4 +1,4 @@
-import 'Algorithms/Sorting/BubbleSort.dart';
+import '../Algorithms/Sorting/BubbleSort.dart';
 
 void main(){
   List logTypes = new List();
