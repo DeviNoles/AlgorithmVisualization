@@ -1,8 +1,8 @@
 #nodeContainer{
   display: flex !important;
-  width: 2vh;
+
+  color: transparent !important;
 }
 #node{
   background: #ff0 !important;
-  height: 50vh !important; /* edit this for graph height = magic */
 }

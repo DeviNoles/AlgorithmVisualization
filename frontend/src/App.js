@@ -4,21 +4,29 @@ import './App.css';
 import random from './logic/generateRandom';
 class App extends Component{
   render(){
+    let numAr = new Array(10);
 
-    random();
+    for(let i = 0; i<10; i++){
+      numAr[i] = random();
+      console.log(numAr[i]);
+    }
     return (
     <div id="nodeBackground">
-  <div class="container">
+  <div className="container">
 
 
   <div id="menu">
   Algorithm Visualization
   </div>
   <div id="nodeContainer">
-  <Node background = "blue" height = "20vh"/>
-  <Node background = "red" height = "10vh"/>
-  <Node background = "yellow" height = "20vh"/>
-  <Node background = "black" height = "5vh"/>
+  {numAr.map(function(index, height){
+    return(
+      <React.Fragment>
+    <Node background = "blue" height = {index}/>
+    </React.Fragment>
+  )
+  })}
+
   </div>
   </div>
 </div>
@@ -27,6 +35,5 @@ class App extends Component{
     );
   }
 }
-
 
 export default App;
