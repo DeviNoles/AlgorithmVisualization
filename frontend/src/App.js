@@ -1,22 +1,24 @@
 import React, { Component, Fragment } from 'react';
-import logo from './logo.svg';
+import Node from './node/Node.js';
 import './App.css';
-import Drawer from '@material-ui/core/Drawer';
-
+import random from './logic/generateRandom';
 class App extends Component{
   render(){
+
+    random();
     return (
-      <html>
-      <head>
-</head>
-<body class="App">
+
+  <div class="container">
+
   <div id="menu">
-
   Algorithm Visualization
-
   </div>
-</body>
-</html>
+
+  <div>
+  <Node/>
+  </div>
+    </div>
+
     );
   }
 }

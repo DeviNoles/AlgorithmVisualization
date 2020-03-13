@@ -1,14 +1,13 @@
-.App{
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: #e7e6e6;
-  z-index: 0;
+.container{
+  display: flex; /* or inline-flex */
+  height: 100%;
+  background: #F0F8FF;
 }
 
+
 #menu{
-position: absolute;
-top: 0; left: 0; right: 0; bottom: 0;
-z-index: 0;
-width: 24%;
-background: #ffffff;
+display: inline !important;
+background: #fff;
+height: 100vh;
+
 }

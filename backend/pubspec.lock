@@ -29,6 +29,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+  angel_redis:
+    dependency: "direct main"
+    description:
+      name: angel_redis
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   angel_route:
     dependency: transitive
     description:
@@ -190,6 +197,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  resp_client:
+    dependency: transitive
+    description:
+      name: resp_client
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.7"
   source_span:
     dependency: transitive
     description:
