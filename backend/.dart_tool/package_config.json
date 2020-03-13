@@ -8,6 +8,12 @@
       "languageVersion": "1.8"
     },
     {
+      "name": "angel_cors",
+      "rootUri": "file:///Users/devin/.pub-cache/hosted/pub.dartlang.org/angel_cors-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "angel_framework",
       "rootUri": "file:///Users/devin/.pub-cache/hosted/pub.dartlang.org/angel_framework-2.1.1",
       "packageUri": "lib/",
@@ -224,7 +230,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-03-12T20:30:57.131695Z",
+  "generated": "2020-03-13T16:54:21.924846Z",
   "generator": "pub",
   "generatorVersion": "2.7.1"
 }
