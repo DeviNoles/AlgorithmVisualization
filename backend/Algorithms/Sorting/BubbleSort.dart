@@ -1,5 +1,6 @@
 class BubbleSort {
   List ar;
+  int count = 0;
   BubbleSort(List ar){
      this.ar = ar;
    }
@@ -9,26 +10,23 @@ class BubbleSort {
   }
 }
   List sort(){
-    List<List<int>> pairs;
+    List stringPairs = new List();
     for(int i = 0; i<this.ar.length; i++){
-      List out = new List();
+
       for(int j=0; j<this.ar.length-i-1; j++){
         if(this.ar[j]>this.ar[j+1]){
-          out[0] = this.ar[j];
-          out[1] = this.ar[j+1];
-          this.ar[j] = out[1];
-          this.ar[j+1] = out[0];
+          int holder = this.ar[j];
+         this.ar[j] = this.ar[j+1];
+         this.ar[j+1] = holder;
+         stringPairs.add(holder.toString() + "," + ar[j].toString());
         }
-        pairs[i]=out;
       }
 
     }
-    printArray();
-    for(var wts = 0; wts<pairs.length; wts++){
-      for(var wtss = 0; wtss<pairs.length; wtss++){
-        print(pairs[wtss]);
-      }
+    for(int i = 0; i<stringPairs.length; i++){
+      print(stringPairs[i]);
     }
+    printArray();
     return this.ar;
   }
 
