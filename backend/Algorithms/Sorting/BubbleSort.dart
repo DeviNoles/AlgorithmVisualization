@@ -46,7 +46,7 @@ void pushToRedis(count, ar) async{
        }
       }
     }
-   pushToRedis(count, stringPairArray);
+//   pushToRedis(count, stringPairArray);
     printArray();
     return stringPairArray;
   }

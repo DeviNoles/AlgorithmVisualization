@@ -20,7 +20,7 @@ class App extends Component{
     axios.post(`http://localhost:6921/insertRedis`, { nums })
     .then(res => {
         console.log(res);
-        console.log(res.data);
+        console.log(res.request.responseText);
       })
 }
 
