@@ -26,7 +26,7 @@ class App extends Component{
 
 
   initializeGraph() {
-      for(let i = 0; i<10; i++){
+      for(let i = 0; i<4; i++){
         this.state.nums[i] = random();
           console.log(this.state.nums[i]);
       }

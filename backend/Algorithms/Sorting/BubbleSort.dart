@@ -13,17 +13,18 @@ class BubbleSort {
       print(type);
   }
 }
-void pushToRedis() async{
+void pushToRedis(count, ar) async{
   var connection = await connectSocket('192.168.0.100');
   var client = new RespClient(connection);
-  var service = new RedisService(new RespCommands(client), prefix: 'bubblesort');
+  var service = new RedisService(new RespCommands(client));
 
   // Create an object
-  await service.create({'id': 'a', 'hello': 'world'});
+  await service.create({'id': '{$count}', 'list': '{$ar}'});
 
   // Read it...
-  var read = await service.read('a');
-  print(read['hello']);
+  var read = await service.read('{$count}');
+  print('printing list');
+ print(read['list']);
 
   // Delete it.
 
@@ -32,20 +33,22 @@ void pushToRedis() async{
 }
 
   List sort(){
+    int count = 0;
+    List stringPairArray = new List();
     for(int i = 0; i<this.ar.length; i++){
       for(int j=0; j<this.ar.length-i-1; j++){
         if(this.ar[j]>this.ar[j+1]){
           int holder = this.ar[j];
          this.ar[j] = this.ar[j+1];
          this.ar[j+1] = holder;
+         var pass = this.ar[j];
+         stringPairArray.add(holder.toString() + "," + pass.toString());
        }
       }
-
     }
-
-    pushToRedis();
+   pushToRedis(count, stringPairArray);
     printArray();
-    return this.ar;
+    return stringPairArray;
   }
 
 }
