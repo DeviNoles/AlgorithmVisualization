@@ -14,7 +14,7 @@ class App extends Component{
     };
     this.initializeGraph();
   }
-  async insertRedis(numAr) {
+async insertRedis(numAr) {
     var ns = this.state.nums;
     const nums = {
      nums: ns
@@ -22,36 +22,45 @@ class App extends Component{
     await axios.post(`http://192.168.0.101:6921/insertRedis`, { nums })
     .then(res => {
         console.log(res);
-        console.log(res.request.responseText);
+    //    console.log(res.request.responseText);
       })
       await axios.get(`http://192.168.0.101:6921/getRedis`)
-      .then(res => {
+      .then(async res => {
+          await this.getRedis(res.request.responseText);
           console.log(res);
-          console.log(res.request.responseText);
+        //  console.log(res.request.responseText);
         })
 
-
-
-
-/*client.on("error", function(error) {
-  console.log('here');
-  console.error(error);
-});*/
-
-//client.set("key", "value", redis.print);
-//client.get("key", redis.print);
 }
 
+async getRedis(res){
+
+    let count = 0;
+    let buffer = "";
+    for (var i = 0; i < res.length; i++) {
+      if(res.charAt(i) == '[' || res.charAt(i) == ']'|| res.charAt(i) == '{' || res.charAt(i) == '}'|| res.charAt(i) == ',' || res.charAt(i) == '|' || res.charAt(i) == ' '){
+        continue;
+      }
+      else {
+        this.state.nums[i+1] = res.charAt(i);
+        this.state.nums[i] = res.charAt(i+2);
+        console.log(res.charAt(i) + res.charAt(i+2));
+        i = i+2;
+
+        this.forceUpdate();
+      }
+  }
+}
 
   initializeGraph() {
-      for(let i = 0; i<60; i++){
+      for(let i = 0; i<4; i++){
         this.state.nums[i] = random();
           console.log(this.state.nums[i]);
       }
       this.insertRedis(this.state.nums);
     }
   render(){
-
+    console.log('here');
 
     return (
     <div id="nodeBackground">

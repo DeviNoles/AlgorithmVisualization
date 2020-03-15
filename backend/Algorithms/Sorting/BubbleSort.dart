@@ -14,7 +14,6 @@ class BubbleSort {
 
 
   List sort(){
-    int count = 0;
     List stringPairArray = new List();
     for(int i = 0; i<this.ar.length; i++){
       for(int j=0; j<this.ar.length-i-1; j++){
@@ -23,12 +22,16 @@ class BubbleSort {
          this.ar[j] = this.ar[j+1];
          this.ar[j+1] = holder;
          var pass = this.ar[j];
-         stringPairArray.add(holder.toString() + "," + pass.toString());
+      //   stringPairArray.add(holder.toString() + "," + j.toString() + "|" +
+      // pass.toString() + "," + (j+1).toString());
+
+      stringPairArray.add(j.toString() + "|" + (j+1).toString());
+
        }
       }
     }
 
-    printArray();
+    //printArray();
     return stringPairArray;
   }
 
