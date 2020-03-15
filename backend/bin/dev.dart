@@ -12,9 +12,9 @@ void pushToRedis(ar) async{
   var service = new RedisService(new RespCommands(client));
   BubbleSort kk = new BubbleSort(ar);
   ar = kk.sort();
-  await service.create({'id': '0', 'list': '{$ar[i]}'});
+  await service.create({'id': '0', 'list': '{$ar}'});
   await connection.close();
-  
+
 
   // Create an object
 
@@ -23,6 +23,29 @@ void pushToRedis(ar) async{
 //  var read = await service.read('{$count}');
 //  print('printing list');
 // print(read['list']);
+
+  // Delete it.
+
+  // Close the connection.
+
+}
+void getRedis(res) async{
+  var connection = await connectSocket('192.168.0.100');
+  var client = new RespClient(connection);
+  var service = new RedisService(new RespCommands(client));
+  // Read it...
+  var read = await service.read('0');
+  print('printing list');
+//  print(read['list']);
+  res.write(read['list']);
+//  await service.create({'id': '0', 'list': '{$ar[i]}'});
+  await connection.close();
+
+
+  // Create an object
+
+
+
 
   // Delete it.
 
@@ -54,6 +77,10 @@ app.post('/insertRedis', (req, res) async {
     } else {
   //    res.write(kk.sort());
     }
+});
+app.get('/getRedis', (req, res) async {
+await getRedis(res);
+
 });
     await http.startServer('192.168.0.101', 6921);
 }

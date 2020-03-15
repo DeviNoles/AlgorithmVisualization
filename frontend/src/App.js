@@ -24,6 +24,11 @@ class App extends Component{
         console.log(res);
         console.log(res.request.responseText);
       })
+      await axios.get(`http://192.168.0.101:6921/getRedis`)
+      .then(res => {
+          console.log(res);
+          console.log(res.request.responseText);
+        })
 
 
 
