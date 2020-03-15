@@ -3,7 +3,9 @@ import axios from 'axios';
 import Node from './node/Node.js';
 import './App.css';
 import random from './logic/generateRandom';
+
 class App extends Component{
+    /* Values are hard-coded for this example, it's usually best to bring these in via file or environment variable for production */
 
   constructor(props){
     super(props);
@@ -12,16 +14,27 @@ class App extends Component{
     };
     this.initializeGraph();
   }
-  insertRedis(numAr){
+  async insertRedis(numAr) {
     var ns = this.state.nums;
     const nums = {
      nums: ns
    };
-    axios.post(`http://localhost:6921/insertRedis`, { nums })
+    await axios.post(`http://192.168.0.101:6921/insertRedis`, { nums })
     .then(res => {
         console.log(res);
         console.log(res.request.responseText);
       })
+
+
+
+
+/*client.on("error", function(error) {
+  console.log('here');
+  console.error(error);
+});*/
+
+//client.set("key", "value", redis.print);
+//client.get("key", redis.print);
 }
 
 

@@ -1,6 +1,4 @@
-import 'package:angel_redis/angel_redis.dart';
-import 'package:resp_client/resp_client.dart';
-import 'package:resp_client/resp_commands.dart';
+
 
 class BubbleSort {
   List ar;
@@ -13,24 +11,7 @@ class BubbleSort {
       print(type);
   }
 }
-void pushToRedis(count, ar) async{
-  var connection = await connectSocket('192.168.0.100');
-  var client = new RespClient(connection);
-  var service = new RedisService(new RespCommands(client));
 
-  // Create an object
-  await service.create({'id': '{$count}', 'list': '{$ar}'});
-
-  // Read it...
-  var read = await service.read('{$count}');
-  print('printing list');
- print(read['list']);
-
-  // Delete it.
-
-  // Close the connection.
-  await connection.close();
-}
 
   List sort(){
     int count = 0;
@@ -46,7 +27,7 @@ void pushToRedis(count, ar) async{
        }
       }
     }
-//   pushToRedis(count, stringPairArray);
+
     printArray();
     return stringPairArray;
   }

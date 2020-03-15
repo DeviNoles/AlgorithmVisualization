@@ -2,7 +2,33 @@ import 'package:angel_framework/angel_framework.dart';
 import 'package:angel_cors/angel_cors.dart';
 import 'package:angel_framework/http.dart';
 import '../Algorithms/Sorting/BubbleSort.dart';
+import 'package:angel_redis/angel_redis.dart';
+import 'package:resp_client/resp_client.dart';
+import 'package:resp_client/resp_commands.dart';
 
+void pushToRedis(ar) async{
+  var connection = await connectSocket('192.168.0.100');
+  var client = new RespClient(connection);
+  var service = new RedisService(new RespCommands(client));
+  BubbleSort kk = new BubbleSort(ar);
+  ar = kk.sort();
+  await service.create({'id': '0', 'list': '{$ar[i]}'});
+  await connection.close();
+  
+
+  // Create an object
+
+
+  // Read it...
+//  var read = await service.read('{$count}');
+//  print('printing list');
+// print(read['list']);
+
+  // Delete it.
+
+  // Close the connection.
+
+}
 main() async {
     var app = Angel();
     var http = AngelHttp(app);
@@ -17,19 +43,17 @@ app.post('/insertRedis', (req, res) async {
 
     var nums = req.bodyAsMap['nums'];
     List logTypes;
+
     nums.forEach((k,v){
       logTypes = v;
     });
-
-
-    BubbleSort kk = new BubbleSort(logTypes);
-
+    pushToRedis(logTypes);
 
     if (nums== null) {
         throw AngelHttpException.badRequest(message: 'Missing name.');
     } else {
-      res.write(kk.sort());
+  //    res.write(kk.sort());
     }
 });
-    await http.startServer('localhost', 6921);
+    await http.startServer('192.168.0.101', 6921);
 }
