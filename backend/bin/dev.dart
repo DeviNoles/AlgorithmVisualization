@@ -6,27 +6,18 @@ import 'package:angel_redis/angel_redis.dart';
 import 'package:resp_client/resp_client.dart';
 import 'package:resp_client/resp_commands.dart';
 
-void pushToRedis(ar) async{
+void pushToRedis(ar, sorts) async{
   var connection = await connectSocket('192.168.0.100');
   var client = new RespClient(connection);
   var service = new RedisService(new RespCommands(client));
-  BubbleSort kk = new BubbleSort(ar);
-  ar = kk.sort();
-  await service.create({'id': '0', 'list': '{$ar}'});
+  if(sorts=="bubble"){
+    BubbleSort kk = new BubbleSort(ar);
+    ar = kk.sort();
+    await service.create({'id': '0', 'list': '{$ar}'});
+  }
+
   await connection.close();
 
-
-  // Create an object
-
-
-  // Read it...
-//  var read = await service.read('{$count}');
-//  print('printing list');
-// print(read['list']);
-
-  // Delete it.
-
-  // Close the connection.
 
 }
 void getRedis(res) async{
@@ -65,12 +56,14 @@ app.post('/insertRedis', (req, res) async {
     await req.parseBody();
 
     var nums = req.bodyAsMap['nums'];
+    var sorts = req.bodyAsMap['sorts']['sort'];
+    print(sorts);
     List logTypes;
 
     nums.forEach((k,v){
       logTypes = v;
     });
-    pushToRedis(logTypes);
+    pushToRedis(logTypes, sorts);
 
     if (nums== null) {
         throw AngelHttpException.badRequest(message: 'Missing name.');

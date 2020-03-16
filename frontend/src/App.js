@@ -5,22 +5,27 @@ import './App.css';
 import random from './logic/generateRandom';
 var key = 0;
 class App extends Component{
-    /* Values are hard-coded for this example, it's usually best to bring these in via file or environment variable for production */
 
   constructor(props){
     super(props);
     this.state = {
-      nums: []
+      nums: [],
+      sort: "",
     };
     this.initializeGraph();
   }
-async insertRedis(numAr) {
-    var ns = this.state.nums;
+async insertRedis(ary, sorty) {
+    var ns = ary;
+    var nss = sorty;
     let argText;
     const nums = {
-     nums: ns
+     num: ns
    };
-    await axios.post(`http://192.168.0.101:6921/insertRedis`, { nums })
+   const sorts = {
+    sort: nss
+  };
+
+    await axios.post(`http://192.168.0.101:6921/insertRedis`, { nums, sorts })
     .then(res => {
         console.log(res);
     //    console.log(res.request.responseText);
@@ -38,41 +43,85 @@ async insertRedis(numAr) {
 async getRedis(res){
   console.log(res);
     let count = 0;
-    let buffer = "";
+    let bufferA = "";
+    let bufferB = "";
     for (var i = 0; i < res.length; i++) {
-      if(res.charAt(i) == '[' || res.charAt(i) == ']'|| res.charAt(i) == '{' || res.charAt(i) == '}'|| res.charAt(i) == ',' || res.charAt(i) == '|' || res.charAt(i) == ' '){
+
+      if(res.charAt(i) == '[' || res.charAt(i) == ']'|| res.charAt(i) == '{' || res.charAt(i) == '}'|| res.charAt(i) == ','){
         continue;
       }
-      else {
-      //  console.log(this.state.nums[parseInt(res.charAt(i))] + '=' + res.charAt(i+2));
-      //  console.log(this.state.nums[parseInt(res.charAt(i+2))]+ '=' + res.charAt(i));
-        let holder = this.state.nums[parseInt(res.charAt(i))];
+      else if(res.charAt(i)=='|'){
+        bufferA = bufferB;
+        bufferB="";
+        continue;
+    }
+      else if(res.charAt(i)==' '){
+        let holder = this.state.nums[parseInt(bufferA)];
         console.log('Holder is: ' + holder);
-        this.state.nums[parseInt(res.charAt(i))] = this.state.nums[parseInt(res.charAt(i+2))];
-        this.state.nums[parseInt(res.charAt(i+2))] = holder;
-        console.log(holder + "<" + this.state.nums[parseInt(res.charAt(i))]);
-        i = i+2;
+        this.state.nums[parseInt(bufferA)] = this.state.nums[parseInt(bufferB)];
+        this.state.nums[parseInt(bufferB)] = holder;
+        console.log(bufferA + "<" + bufferB);
+      //  i = i+2;
         key++;
         const sleep = (milliseconds) => {
           return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
-  await  sleep(100).then(() => {
-    this.forceUpdate();
-    })
-
+        }
+        await  sleep(100).then(() => {
+          this.forceUpdate();
+        })
+        bufferA = "";
+        bufferB = "";
+        continue;
       }
+
+      else{
+        bufferB=bufferB + res.charAt(i);
+        console.log(bufferB);
+      }
+      //  console.log(this.state.nums[parseInt(res.charAt(i))] + '=' + res.charAt(i+2));
+      //  console.log(this.state.nums[parseInt(res.charAt(i+2))]+ '=' + res.charAt(i));
+    } //for loop
+    if(bufferB.length>0 && bufferA.length>0){
+      let holder = this.state.nums[parseInt(bufferA)];
+      console.log('Holder is: ' + holder);
+      this.state.nums[parseInt(bufferA)] = this.state.nums[parseInt(bufferB)];
+      this.state.nums[parseInt(bufferB)] = holder;
+      console.log(bufferA + "<" + bufferB);
+    //  i = i+2;
+      key++;
+      const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+      }
+      await  sleep(100).then(() => {
+        this.forceUpdate();
+      })
+      bufferA = "";
+      bufferB = "";
+    }
   }
-}
 
   initializeGraph() {
       for(let i = 0; i<10; i++){
         this.state.nums[i] = random();
           console.log(this.state.nums[i]);
       }
-      this.insertRedis(this.state.nums);
+    //  this.forceUpdate();
+
     }
   render(){
     console.log('here');
+    let genGraph = (e) => {
+      e.preventDefault();
+      this.initializeGraph();
+      this.forceUpdate();
+    }
+    let bubble = (e) => {
+      e.preventDefault();
+      //this.state.sort = "bubble";
+      this.insertRedis(this.state.nums, "bubble");
+    }
+
+
     return (
     <div id="nodeBackground">
   <div className="container">
@@ -80,7 +129,38 @@ async getRedis(res){
 
   <div id="menu">
   Algorithm Visualization
+
+  <div className="buttons">
+  <div id ="bubbleSort">
+<button type="button" onClick={genGraph}>Generate New List</button>
+</div>
+<div id ="bubbleSort">
+<button type="button" onClick={bubble}>Bubble Sort</button>
+</div>
+  <div id ="bubbleSort">
+<button type="button">Merge Sort</button>
+</div>
+  <div id ="bubbleSort">
+<button type="button">Heap Sort</button>
+</div>
+  <div id ="bubbleSort">
+<button type="button">Quick Sort</button>
+</div>
+  <div id ="bubbleSort">
+<button type="button">Merge Sort</button>
+</div>
+  <div id ="bubbleSort">
+<button type="button">Counting Sort</button>
+</div>
+  <div id ="bubbleSort">
+<button type="button">Radix Sort</button>
+</div>
+  <div id ="bubbleSort">
+<button type="button">Bucket Sort</button>
+</div>
   </div>
+  </div>
+
   <div  key ={key} id="nodeContainer">
 
   {this.state.nums.map(function(height, index){
