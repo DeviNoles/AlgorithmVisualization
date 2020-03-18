@@ -1,6 +1,6 @@
 # AlgorithmVisualization
-- [X] Angel
-- [ ] Redis
-- [X] React
-- [ ] Random Data
-- [ ] Docker
+
+- [ ] Write more algorithms
+- [ ] Highlight current and when complete.
+- [ ] Clean up UI
+- [ ] Host on AWS
