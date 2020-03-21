@@ -1,5 +1,3 @@
-
-
 class BubbleSort {
   List ar;
   int count = 0;
