@@ -25,19 +25,21 @@ async insertRedis(ary, sorty) {
     sort: nss
   };
 
-    await axios.post(`http://192.168.0.101:6921/insertRedis`, { nums, sorts })
+    await axios.post(`http://127.0.0.1:6921/insertRedis`, { nums, sorts })
     .then(res => {
         console.log(res);
     //    console.log(res.request.responseText);
       })
-      await axios.get(`http://192.168.0.101:6921/getRedis`)
+      await axios.get(`http://127.0.0.1:6921/getRedis`)
       .then(async res => {
           argText = res.request.responseText;
           console.log(argText);
-        //  console.log(res.request.responseText);
-        })
+          console.log(res.request.responseText);
+        console.log(this.state.nums);
 
+        })
         this.getRedis(argText);
+
 }
 
 async getRedis(res){
@@ -117,8 +119,14 @@ async getRedis(res){
     }
     let bubble = (e) => {
       e.preventDefault();
-      //this.state.sort = "bubble";
+      this.state.sort = "bubble";
       this.insertRedis(this.state.nums, "bubble");
+    }
+    let mergey = (e) => {
+      e.preventDefault();
+      //this.state.sort = "bubble";
+      this.insertRedis(this.state.nums, "merge");
+
     }
 
 
@@ -137,8 +145,8 @@ async getRedis(res){
 <div id ="bubbleSort">
 <button type="button" onClick={bubble}>Bubble Sort</button>
 </div>
-  <div id ="bubbleSort">
-<button type="button">Merge Sort</button>
+  <div id ="mergeSort">
+<button type="button" onClick={mergey}>Merge Sort</button>
 </div>
   <div id ="bubbleSort">
 <button type="button">Heap Sort</button>

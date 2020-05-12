@@ -2,26 +2,38 @@ import 'package:angel_framework/angel_framework.dart';
 import 'package:angel_cors/angel_cors.dart';
 import 'package:angel_framework/http.dart';
 import '../Algorithms/Sorting/BubbleSort.dart';
+import '../Algorithms/Sorting/MergeSort.dart';
 import 'package:angel_redis/angel_redis.dart';
 import 'package:resp_client/resp_client.dart';
 import 'package:resp_client/resp_commands.dart';
+import 'dart:convert';
+String hostname = 'redus.redis.cache.windows.net';
+String ckey = 'Y2YnXfkIhxCJQEQBRPTjfqAwYcg96Y3lqo4HygNBVj4=';
+String basicAuth = base64Encode(utf8.encode('$hostname:$ckey'));
+
 
 void pushToRedis(ar, sorts) async{
-  var connection = await connectSocket('192.168.0.100');
+  var connection = await connectSocket(hostname);
   var client = new RespClient(connection);
   var service = new RedisService(new RespCommands(client));
   if(sorts=="bubble"){
     BubbleSort kk = new BubbleSort(ar);
     ar = kk.sort();
+    //print(ar);
+    await service.create({'id': '0', 'list': '{$ar}'});
+  }
+  else if(sorts=="merge"){
+    MergeSort kk = new MergeSort(ar);
+    ar = kk.sort(ar,0,ar.length-1);
+    //print(ar);
     await service.create({'id': '0', 'list': '{$ar}'});
   }
 
   await connection.close();
 
-
 }
 void getRedis(res) async{
-  var connection = await connectSocket('192.168.0.100');
+  var connection = await connectSocket(hostname);
   var client = new RespClient(connection);
   var service = new RedisService(new RespCommands(client));
   // Read it...
@@ -34,9 +46,6 @@ void getRedis(res) async{
 
 
   // Create an object
-
-
-
 
   // Delete it.
 
@@ -57,23 +66,28 @@ app.post('/insertRedis', (req, res) async {
 
     var nums = req.bodyAsMap['nums'];
     var sorts = req.bodyAsMap['sorts']['sort'];
-    print(sorts);
+    print("Sorts is "+sorts);
+  //  print(nums);
     List logTypes;
 
     nums.forEach((k,v){
       logTypes = v;
+
     });
-    pushToRedis(logTypes, sorts);
+    await pushToRedis(logTypes, sorts);
 
     if (nums== null) {
         throw AngelHttpException.badRequest(message: 'Missing name.');
     } else {
-  //    res.write(kk.sort());
+    //
     }
 });
 app.get('/getRedis', (req, res) async {
+
 await getRedis(res);
 
 });
-    await http.startServer('192.168.0.101', 6921);
+
+  String hostname = 'redus.redis.cache.windows.net';
+    await http.startServer('127.0.0.1', 6921);
 }

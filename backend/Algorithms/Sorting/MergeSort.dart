@@ -1,5 +1,6 @@
 class MergeSort {
   List ar;
+  List stringPairArray = new List();
   int count = 0;
   MergeSort(List ar){
      this.ar = ar;
@@ -11,33 +12,23 @@ class MergeSort {
 }
 
 
-void sort(var arr, var low, var high){
+List sort(var arr, var low, var high){
   int rmid = low + ((high - low) / 2).toInt();
 
 
-  if(high == low){
-  //  print("HIGH WAS: " + (this.ar[high]).toString() + " LOW WAS: " + (this.ar[low]).toString());
-  //  print("RETURNING");
-    return;
+  if(high <= low){
+
   }
-//  print("TOP");
-  //  print("LOW IS: " + low.toString() + " MID IS: " + rmid.toString() + " HIGH IS: " + high.toString());
-  for(int test=0; test<=rmid; test++){
-//    print(this.ar[test]);
-  }
+  else{
     sort(arr, low, rmid);
-
-  //  print("BOTTOM");
-    //print("LOW IS: " + low.toString() + " MID IS: " + (rmid+1).toString() + " HIGH IS: " + high.toString());
-  for(int test=rmid+1; test<=high; test++){
-    //  print(this.ar[test]);
-  }
     sort(arr, rmid+1, high);
-
     merge(low,rmid,high);
+  }
+return stringPairArray;
   }
 void merge(var low, var mid, var high){
   List helper = new List();
+
 //  print("MERGE CALL ON: ");
   var index = 0;
   for(int mergeing = low; mergeing<=high; mergeing++){
@@ -58,22 +49,35 @@ void merge(var low, var mid, var high){
       i += 1;
     }
 		else{
+      print("FIRST");
+      print("SWITCHING: " + i.toString() + "AND " + j.toString());
+
+      stringPairArray.add(i.toString() + "|" + j.toString());
+  //     stringPairArray.add(k.toString() + "|" + i.toString());
 			helper[k] = this.ar[j];
 			k += 1;
       j += 1;
     }
 }
 while(i <= mid){
+  print("SECOND");
+  //  print("SWITCHING: " + k.toString() + "AND " + i.toString());
+    stringPairArray.add(k.toString() + "|" + i.toString());
 		helper[k] = this.ar[i];
-		k += 1; i += 1;
+		k += 1;
+    i += 1;
 }
 	while(j <= high){
+  //    print("THIRD");
+  //  print("SWITCHING: " + k.toString() + "AND " + j.toString());
+  //  stringPairArray.add(j.toString() + "|" + i.toString());
 		helper[k] = this.ar[j];
 		k += 1;
     j += 1;
 }
 	for(i = low; i <= high; i += 1){
 		this.ar[i] = helper[i - low];
+    }
+  printArray(this.ar);
   }
-}
 }
