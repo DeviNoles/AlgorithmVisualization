@@ -8,7 +8,8 @@
 ### Backend
 `dart bin/dev.dart`
 
-You need to change the redis cache to your own in dev.dart
+Make sure you have all the imported dart packages installed by running `pub get`
+Change the redis cache to your own in dev.dart
 
 ### Frontend
 `npm install`
