@@ -8,6 +8,8 @@
 ### Backend
 `dart bin/dev.dart`
 
+You need to change the redis cache to your own in dev.dart
+
 ### Frontend
 `npm install`
 
