@@ -2,9 +2,7 @@
 
 ![](resources/bg.png)
 
-### This was being hosted on my home network with a Redis server also on my home network. I was in the middle of moving this to AWS and my account got suspended.
-
-### Currently moving this project to Azure and I am taking advantage of Azure Redis Cache.
+### This was being hosted on my home network with a Redis server also on my home network. Due to the security risk this poses I am currently moving this project to Azure Redis Cache and I will most likely host it on a box there.
 
 ## How to run
 ### Backend
