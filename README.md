@@ -16,5 +16,5 @@
 ## To Do
 - [ ] Write more algorithms
 - [ ] Highlight current and when complete.
-- [ ] Clean up UI
-- [ ] Host on AWS
+- [X] Clean up UI
+- [ ] Host on Azure
