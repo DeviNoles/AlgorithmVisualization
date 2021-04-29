@@ -29,7 +29,7 @@ void getRedis(res) async{
   print('printing list');
   print(read['list']);
   res.write(read['list']);
-//  await service.create({'id': '0', 'list': '{$ar[i]}'});
+  await service.create({'id': '0', 'list': '{$ar[i]}'});
   await connection.close();
 
 
@@ -49,8 +49,9 @@ main() async {
     app.fallback(cors());
 
     app.get('/', (req, res) => res.write('Hello, world!'));
-    app.get('/help', (req, res) {
+    app.get('/help', (req, res)async  {
       res.write("WTF");
+      await getRedis(res);
 });
 app.post('/insertRedis', (req, res) async {
     await req.parseBody();

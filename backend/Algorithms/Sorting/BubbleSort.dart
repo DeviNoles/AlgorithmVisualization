@@ -29,7 +29,7 @@ class BubbleSort {
       }
     }
 
-    //printArray();
+    printArray();
     return stringPairArray;
   }
 
