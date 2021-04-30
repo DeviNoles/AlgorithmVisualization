@@ -1,8 +1,15 @@
+import 'dart:io';
 class BubbleSort {
   List ar;
   int count = 0;
   BubbleSort(List ar){
      this.ar = ar;
+     var file = File('BubbleSortCompare.txt');
+  var sink = file.openWrite();
+  sink.write(ar);
+
+  // Close the IOSink to free system resources.
+  sink.close();
    }
   void printArray(){
     for(int type in ar){
