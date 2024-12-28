@@ -1,0 +1,94 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.holder {
+    display: grid;
+    gap: 20px;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    margin: auto;
+    margin-bottom: 2%;
+    white-space: nowrap;
+    display: inline-block;
+    padding: 10px 15px; 
+    border: 2px solid black;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    text-align: center;
+    width: auto;
+    max-width: 100%;
+    line-height: 1;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #b5c3cc;
+    padding: 10px 20px;
+    border-radius: 8px;
+    height: auto; 
+
+    margin-bottom: 3%;
+}
+
+.menu-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1; /* Takes up half of the space */
+}
+
+.menu-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1; /* Takes up half of the space */
+    margin-right: 1vw !important;
+}
+
+.menu-right button {
+    margin-left: 10px; /* Adds space between buttons */
+}
+.dropdown label {
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+.dropdown select {
+    padding: 4px 8px;
+    font-size: 1em;
+}
+
+.algos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #b5c3cc;
+    padding: 15px;
+    border-radius: 8px;
+    height: 69vh;
+    
+}
+
+.baseline {
+    display: flex;
+    align-self: flex-end;
+    background: white;
+    height: 10px;
+    width: 100%;
+    border-radius: 3px;
+}
