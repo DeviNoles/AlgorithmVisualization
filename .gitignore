@@ -1,13 +1,25 @@
-# Node.js dependencies
+# Node.js / npm
 node_modules/
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
 
+# Dart / Flutter
+.dart_tool/
+.build/
+.pub/
+.packages
+pubspec.lock
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-versions
+.flutter-plugins-dependencies
+
 # Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.log
 
 # Environment Variables
 .env
@@ -16,35 +28,46 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# Editor Directories and Files
+# IDE / Editors
 .vscode/
 .idea/
-.DS_Store
-*.swp
-
-# Build and Output
-dist/
-out/
-build/
-.cache/
-.next/
-.nuxt/
-*.log
-*.gz
-*.map
+*.iml
 
 # Testing and Coverage
 coverage/
 *.lcov
 .jest/
 
-# React and JSX-Specific Files
+# Build Output
+dist/
+out/
+build/
+.cache/
+.next/
+.nuxt/
+
+# Temporary and Backup Files
+*.tmp
+*.swp
+*.bak
+*.~*
+
+# Dart Specific
+*.dart_tool/
+*.flutter-plugins
+*.flutter-plugins-dependencies
+*.dart_tool/
+*.packages
+*.flutter-plugins
+*.flutter-plugins-dependencies
+
+# React and JSX Specific
 *.jsx~
 *.jsx.tmp
 *.tsx~
 *.tsx.tmp
 
-# Static Files and Assets
+# Static Assets
 public/static/
 static/
 *.png
@@ -53,6 +76,6 @@ static/
 *.gif
 *.svg
 
-# Misc
-npm-debug.log*
-node_modules/
+# System Files
+.DS_Store
+Thumbs.db
